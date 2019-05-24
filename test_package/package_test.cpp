@@ -1,5 +1,11 @@
-#include "hello.h"
+#include <iostream>
+#include <violet.h>
 
-int main() {
-    hello();
-}
+class PackageTest {
+public:
+  void launch() {
+    std::cout << "Hello World!" << std::endl;
+  }
+};
+
+VIOLET_APP(PackageTest)

@@ -3,6 +3,8 @@ project(PackageTest CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 
+# add_definitions("-fconcepts")
+
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
