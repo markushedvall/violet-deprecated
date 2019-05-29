@@ -12,6 +12,7 @@ class VioletConan(ConanFile):
     default_options = "shared=False"
     generators = "cmake"
     exports_sources = "src/*", "CMakeLists.txt"
+    requires = "spdlog/1.3.1@bincrafters/stable"
 
     def build(self):
         cmake = CMake(self)
