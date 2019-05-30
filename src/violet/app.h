@@ -1,11 +1,18 @@
 #ifndef VIOLET_APP_H
 #define VIOLET_APP_H
 
-#define VIOLET_APP(T)\
-static T app;\
+#include "app_info.h"
+
+#define VIOLET_APP(APP, NAME)\
+static APP app;\
+static violet::AppInfo app_info(NAME);\
 void violet::App::launch() {\
   violet::constrain(app);\
   app.launch();\
+}\
+\
+const violet::AppInfo& violet::App::info() {\
+  return app_info;\
 }
 
 namespace violet {
@@ -16,6 +23,8 @@ public:
   App() = delete;
 
   static void launch();
+
+  static const AppInfo& info();
 
 };
 
