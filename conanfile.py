@@ -11,7 +11,7 @@ class VioletConan(ConanFile):
     options = {"shared": [True, False]}
     default_options = "shared=False"
     generators = "cmake"
-    exports_sources = "src/*", "CMakeLists.txt"
+    exports_sources = "src/*", "cmake/*", "CMakeLists.txt"
     requires = "spdlog/1.3.1@bincrafters/stable"
 
     def build(self):
@@ -20,7 +20,7 @@ class VioletConan(ConanFile):
         cmake.build()
 
     def package(self):
-        self.copy("*.h", dst="include", src="src")
+        self.copy("*.h", dst="include", src="src", excludes="*/pch.h")
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.so", dst="lib", keep_path=False)
         self.copy("*.dylib", dst="lib", keep_path=False)
