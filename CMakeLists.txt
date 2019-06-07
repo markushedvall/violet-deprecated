@@ -6,4 +6,4 @@ set(CMAKE_CXX_STANDARD 11)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-add_library(violet src/hello.cpp)
+add_library(violet src/violet/entry_point.cpp)
