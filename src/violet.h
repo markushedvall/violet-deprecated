@@ -6,5 +6,6 @@
 #include "violet/app_info.h"
 #include "violet/log.h"
 #include "violet/assert.h"
+#include "violet/event.h"
 
 #endif

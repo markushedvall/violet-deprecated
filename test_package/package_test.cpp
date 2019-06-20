@@ -7,12 +7,36 @@
 
 using violet::Log;
 using violet::App;
+using violet::Event;
+using violet::EventQueue;
 
 class PackageTest : public App {
 public:
 
   PackageTest() {
     Log::info("Starting {}", App::info().name());
+  }
+
+  void test_events() {
+    EventQueue queue;
+    auto e1 = Event::KeyPressed();
+    auto e2 = Event::MouseMoved();
+    queue.push_back(e1);
+    queue.push_back(e2);
+
+    auto front = queue.front();
+    if (front.is<Event::KeyPressed>()) {
+      Log::info(front.name());
+    }
+
+    for (auto& e: queue) {
+      if (e.in_category(Event::Category::Input)) {
+        Log::info("Category Input: {}", e.name());
+      }
+      if (e.in_category(Event::Category::Mouse)) {
+        Log::info("Category Mouse: {}", e.name());
+      }
+    }
   }
 
   void tick() override {
