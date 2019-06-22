@@ -1,13 +1,16 @@
-#include <iostream>
 #include <violet.h>
 
+using violet::Log;
 using violet::App;
+using violet::Logger;
 
 class PackageTest {
 public:
   void launch() {
-    std::cout << "Hello World!" << std::endl;
-    std::cout << App::info().name() << std::endl;
+    Log::trace("Hello World!");
+    Log::info("{}", App::info().name());
+    Logger logger("Custom");
+    logger.warn("hello");
   }
 };
 

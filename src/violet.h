@@ -4,5 +4,6 @@
 #include "violet/entry_point.h"
 #include "violet/app.h"
 #include "violet/app_info.h"
+#include "violet/log.h"
 
 #endif
