@@ -17,6 +17,8 @@ const violet::AppInfo& violet::App::info() {\
 
 namespace violet {
 
+class EventQueue;
+
 class App {
 public:
 
@@ -24,18 +26,21 @@ public:
 
   void run();
 
-  virtual void tick() = 0;
+  virtual void tick(EventQueue& events) = 0;
 
   static std::unique_ptr<App> create();
 
   static const AppInfo& info();
 
   static const void terminate() {
-    exit(0);
+    terminate_ = true;
   }
 
 private:
 
+  void poll_events(EventQueue& events);
+
+  static volatile bool terminate_;
   bool running_;
   Surface surface_;
 
