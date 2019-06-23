@@ -6,7 +6,7 @@ using violet::Logger;
 
 class PackageTest {
 public:
-  void launch() {
+  void run() {
     Log::trace("Hello World!");
     Log::info("{}", App::info().name());
     Logger logger("Custom");

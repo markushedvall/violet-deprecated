@@ -16,7 +16,7 @@ using detail::EngineLog;
 
 void EntryPoint::enter() {
   EngineLog::info("Initializing Violet Engine");
-  App::launch();
+  App::run();
 }
 
 }

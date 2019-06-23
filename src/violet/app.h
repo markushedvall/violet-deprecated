@@ -6,9 +6,9 @@
 #define VIOLET_APP(APP, NAME)\
 static APP app;\
 static violet::AppInfo app_info(NAME);\
-void violet::App::launch() {\
+void violet::App::run() {\
   violet::constrain(app);\
-  app.launch();\
+  app.run();\
 }\
 \
 const violet::AppInfo& violet::App::info() {\
@@ -22,7 +22,7 @@ public:
 
   App() = delete;
 
-  static void launch();
+  static void run();
 
   static const AppInfo& info();
 
