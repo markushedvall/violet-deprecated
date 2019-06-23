@@ -17,32 +17,32 @@ public:
 
   template<typename... Args>
   void trace(const Args&... args) noexcept {
-    logger.trace(args...);
+    logger_.trace(args...);
   }
 
   template<typename... Args>
   void info(const Args&... args) noexcept {
-    logger.info(args...);
+    logger_.info(args...);
   }
 
   template<typename... Args>
   void warn(const Args&... args) noexcept {
-    logger.warn(args...);
+    logger_.warn(args...);
   }
 
   template<typename... Args>
   void error(const Args&... args) noexcept {
-    logger.error(args...);
+    logger_.error(args...);
   }
 
   template<typename... Args>
   void critical(const Args&... args) noexcept {
-    logger.critical(args...);
+    logger_.critical(args...);
   }
 
 private:
 
-  spdlog::logger logger;
+  spdlog::logger logger_;
 
 };
 
