@@ -3,6 +3,7 @@
 using violet::Log;
 using violet::App;
 using violet::Logger;
+using violet::Assert;
 
 class PackageTest {
 public:
@@ -11,6 +12,8 @@ public:
     Log::info("{}", App::info().name());
     Logger logger("Custom");
     logger.warn("hello");
+
+    Assert::not_reached("Unexpectedly reached {}", "the end");
   }
 };
 
