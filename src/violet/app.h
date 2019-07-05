@@ -1,50 +1,35 @@
 #ifndef VIOLET_APP_H
 #define VIOLET_APP_H
 
+#include <memory>
+
 #include "app_info.h"
 
 #define VIOLET_APP(APP, NAME)\
-static APP app;\
-static violet::AppInfo app_info(NAME);\
-void violet::App::run() {\
-  violet::constrain(app);\
-  app.run();\
+std::unique_ptr<violet::App> violet::App::create() {\
+  return std::unique_ptr<violet::App>(new APP());\
 }\
-\
 const violet::AppInfo& violet::App::info() {\
+  static violet::AppInfo app_info(NAME);\
   return app_info;\
 }
 
 namespace violet {
 
-class App final {
+class App {
 public:
 
-  App() = delete;
+  App() {}
 
-  static void run();
+  virtual ~App() {}
+
+  virtual void run() = 0;
+
+  static std::unique_ptr<App> create();
 
   static const AppInfo& info();
 
 };
-
-#ifdef __cpp_concepts
-
-template<typename T>
-concept Launchable = requires(T a) {
-  {a.launch()} -> void;
-};
-
-template<typename T>
-  requires Launchable<T>
-constexpr void constrain(T) {}
-
-#else
-
-template<typename T>
-constexpr void constrain(T) {}
-
-#endif
 
 }
 

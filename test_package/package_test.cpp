@@ -1,12 +1,11 @@
 #include <violet.h>
 
 using violet::Log;
-using violet::App;
 using violet::Logger;
 
-class PackageTest {
+class PackageTest : public violet::App {
 public:
-  void run() {
+  void run() override {
     Log::trace("Hello World!");
     Log::info("{}", App::info().name());
     Logger logger("Custom");
