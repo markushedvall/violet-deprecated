@@ -1,4 +1,7 @@
+#include "pch.h"
+
 #include "entry_point.h"
+
 #include "app.h"
 #include "detail/engine_log.h"
 
