@@ -2,6 +2,9 @@
 
 #include <violet.h>
 
+#include <chrono>
+#include <thread>
+
 using violet::Log;
 using violet::App;
 
@@ -16,8 +19,8 @@ public:
     static auto t1 = std::chrono::steady_clock::now();
     auto t2 = std::chrono::steady_clock::now();
     auto d = std::chrono::duration_cast<std::chrono::seconds>(t2 - t1);
-    if (d >= std::chrono::seconds(5)) {
-      Log::info("Five seconds passed. Closing application...");
+    if (d >= std::chrono::seconds(3)) {
+      Log::info("{} seconds passed. Closing application...", d.count());
       App::terminate();
     }
   }
