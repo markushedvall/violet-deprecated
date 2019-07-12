@@ -9,6 +9,7 @@ conan_basic_setup()
 
 add_library(violet
   src/violet/entry_point.cpp
+  src/violet/app.cpp
   src/violet/logger.cpp
   src/violet/log.cpp
   src/violet/detail/engine_log.cpp

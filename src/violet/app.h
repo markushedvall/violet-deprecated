@@ -19,15 +19,23 @@ namespace violet {
 class App {
 public:
 
-  App() {}
-
   virtual ~App() {}
 
-  virtual void run() = 0;
+  void run();
+
+  virtual void tick() = 0;
 
   static std::unique_ptr<App> create();
 
   static const AppInfo& info();
+
+  static const void terminate() {
+    exit(0);
+  }
+
+private:
+
+  bool running_;
 
 };
 
