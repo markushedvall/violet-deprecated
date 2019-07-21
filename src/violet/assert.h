@@ -23,11 +23,11 @@ public:
     #endif
   }
 
-  template<typename T, typename... Args>
+  template<typename L, typename... Args>
   static void is_true(bool condition, const Args&... args) {
     #ifndef NDEBUG
     if (!condition) {
-      T::error("Assertion failed: {}", fmt::format(args...));
+      L::error("Assertion failed: {}", fmt::format(args...));
       std::abort();
     }
     #endif
@@ -38,6 +38,31 @@ public:
     is_true<Log>(condition, args...);
   }
 
+  template<typename T, typename... Args>
+  static void not_null(Logger& logger, const T* ptr, const Args&... args) {
+    #ifndef NDEBUG
+    if (ptr == nullptr) {
+      logger.error("Assertion failed: {}", fmt::format(args...));
+      std::abort();
+    }
+    #endif
+  }
+
+  template<typename L, typename T, typename... Args>
+  static void not_null(const T* ptr, const Args&... args) {
+    #ifndef NDEBUG
+    if (ptr == nullptr) {
+      L::error("Assertion failed: {}", fmt::format(args...));
+      std::abort();
+    }
+    #endif
+  }
+
+  template<typename T, typename... Args>
+  static void not_null(const T* ptr, const Args&... args) {
+    not_null<Log>(ptr, args...);
+  }
+
   template<typename... Args>
   static void not_reached(Logger& logger, const Args&... args) {
     #ifndef NDEBUG
@@ -46,10 +71,10 @@ public:
     #endif
   }
 
-  template<typename T, typename... Args>
+  template<typename L, typename... Args>
   static void not_reached(const Args&... args) {
     #ifndef NDEBUG
-    T::error("Assertion failed: {}", fmt::format(args...));
+    L::error("Assertion failed: {}", fmt::format(args...));
     std::abort();
     #endif
   }

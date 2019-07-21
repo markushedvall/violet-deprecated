@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "app_info.h"
+#include "surface.h"
 
 #define VIOLET_APP(APP, NAME)\
 std::unique_ptr<violet::App> violet::App::create() {\
@@ -36,6 +37,7 @@ public:
 private:
 
   bool running_;
+  Surface surface_;
 
 };
 

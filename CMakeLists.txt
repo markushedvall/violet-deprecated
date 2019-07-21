@@ -13,6 +13,7 @@ add_library(violet
   src/violet/logger.cpp
   src/violet/log.cpp
   src/violet/detail/engine_log.cpp
+  src/violet/detail/platform/desktop/desktop_surface.cpp
 )
 
 set(VIOLET_PCH_DIR ${CMAKE_SOURCE_DIR}/src/violet/detail/pch)
