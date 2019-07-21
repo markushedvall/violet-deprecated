@@ -8,6 +8,7 @@
 #include "../../engine_log.h"
 #include "../../../assert.h"
 #include "../../../app.h"
+#include "../../../event_queue.h"
 
 namespace violet {
 namespace detail {
@@ -33,12 +34,52 @@ void DesktopSurface::GlfwWindowDeleter::operator()(GLFWwindow* window) {
 }
 
 DesktopSurface::DesktopSurface() noexcept : window_(create_window()) {
-  glfwSetInputMode(window_.get(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+  glfwSetWindowUserPointer(window_.get(), &event_buffer_);
 
-  glfwSetWindowCloseCallback(window_.get(), [](GLFWwindow* window) {
+  glfwSetWindowCloseCallback(window_.get(), [](GLFWwindow* w) {
     EngineLog::trace("GLFW Window close callback");
     App::terminate();
 	});
+
+  glfwSetCursorPosCallback(window_.get(), [](GLFWwindow* w, double x, double y) {
+    auto event_buffer = (std::vector<Event>*)glfwGetWindowUserPointer(w);
+    event_buffer->push_back(Event::MouseMoved(x, y));
+  });
+
+  glfwSetScrollCallback(window_.get(), [](GLFWwindow* w, double x, double y) {
+    auto event_buffer = (std::vector<Event>*)glfwGetWindowUserPointer(w);
+    event_buffer->push_back(Event::MouseScrolled(x, y));
+  });
+
+  glfwSetMouseButtonCallback(window_.get(), [](GLFWwindow* w, int button, int action, int mods) {
+    auto event_buffer = (std::vector<Event>*)glfwGetWindowUserPointer(w);
+    switch (action) {
+      case GLFW_PRESS:
+        event_buffer->push_back(Event::MouseButtonPressed(button));
+        break;
+      case GLFW_RELEASE:
+        event_buffer->push_back(Event::MouseButtonReleased(button));
+        break;
+      default:
+        // Ignore
+        break;
+    }
+  });
+
+  glfwSetKeyCallback(window_.get(), [](GLFWwindow* w, int key, int code, int action, int mods) {
+    auto event_buffer = (std::vector<Event>*)glfwGetWindowUserPointer(w);
+    switch (action) {
+      case GLFW_PRESS:
+        event_buffer->push_back(Event::KeyPressed(key));
+        break;
+      case GLFW_RELEASE:
+        event_buffer->push_back(Event::KeyReleased(key));
+        break;
+      default:
+        // Ignore
+        break;
+    }
+  });
 
   glfwMakeContextCurrent(window_.get());
 
@@ -67,8 +108,12 @@ DesktopSurface::GlfwWindowPtr DesktopSurface::create_window() noexcept {
     glfwCreateWindow(mode->width, mode->height, window_title, monitor, nullptr));
 }
 
-void DesktopSurface::poll_events() const noexcept {
+void DesktopSurface::poll_events(EventQueue& events) noexcept {
   glfwPollEvents();
+  for (auto event: event_buffer_) {
+    events.push(std::move(event));
+  }
+  event_buffer_.clear();
 }
 
 void DesktopSurface::swap_buffers() const noexcept {

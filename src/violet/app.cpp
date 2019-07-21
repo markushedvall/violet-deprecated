@@ -28,7 +28,7 @@ void App::poll_events(EventQueue& events) {
   if (terminate_) {
     events.push(Event::AppWillTerminate());
   }
-  surface_.poll_events();
+  surface_.poll_events(events);
 }
 
 }

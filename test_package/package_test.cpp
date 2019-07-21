@@ -23,6 +23,11 @@ public:
         Log::info("App will terminate");
         return;
       }
+      if (e.is<Event::MouseMoved>()) {
+        auto mve = e.as<Event::MouseMoved>();
+        Log::info("Mouse moved x:{} y:{}", mve.x(), mve.y());
+        return;
+      }
     }
 
     static auto t1 = std::chrono::steady_clock::now();
