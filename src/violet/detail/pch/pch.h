@@ -4,8 +4,11 @@
 #include <string>
 #include <memory>
 #include <utility>
+#include <deque>
 
 #include <spdlog/logger.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
+
+#include <mpark/variant.hpp>
 
 #endif

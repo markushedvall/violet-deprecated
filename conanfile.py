@@ -14,6 +14,7 @@ class VioletConan(ConanFile):
     exports_sources = "src/*", "cmake/*", "CMakeLists.txt"
     requires = (
         "spdlog/1.3.1@bincrafters/stable",
+        "variant/1.3.0@bincrafters/stable",
         "glfw/3.2.1@bincrafters/stable",
     )
 
