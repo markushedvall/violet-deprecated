@@ -7,20 +7,54 @@
 
 using violet::Log;
 using violet::App;
+using violet::Layer;
 using violet::Event;
 using violet::EventQueue;
 
-class PackageTest : public App {
+class TestLayer final : public Layer {
 public:
 
-  PackageTest() {
-    Log::info("Starting {}", App::info().name());
+  TestLayer(const std::string& name) : name_(std::move(name)) {}
+
+  void attach() override {
+    Log::info("{} attached", name_);
+  }
+
+  void detach() override {
+    Log::info("{} detached", name_);
   }
 
   void tick(EventQueue& events) override {
-    for (auto e : events) {
+    for (auto&& e : events) {
       if (e.is<Event::AppWillTerminate>()) {
-        Log::info("App will terminate");
+        Log::info("{}: Terminate event", name_);
+      }
+    }
+  }
+
+private:
+
+  std::string name_;
+
+};
+
+class PackageTest final : public App {
+public:
+
+  void attach() override {
+    Log::info("PackageTest attached");
+    push_layer(new TestLayer("Layer1"));
+    push_layer(new TestLayer("Layer2"));
+  }
+
+  void detach() override {
+    Log::info("PackageTest detached");
+  }
+
+  void tick(EventQueue& events) override {
+    for (auto&& e : events) {
+      if (e.is<Event::AppWillTerminate>()) {
+        Log::info("PackageTest: Terminate event");
         return;
       }
       if (e.is<Event::MouseMoved>()) {

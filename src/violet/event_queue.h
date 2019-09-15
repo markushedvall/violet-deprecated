@@ -13,7 +13,7 @@ public:
   using Iterator = std::deque<Event>::iterator;
 
   void push(Event&& event) {
-    queue_.push_back(event);
+    queue_.push_back(std::move(event));
   }
 
   void clear() noexcept {
