@@ -2,7 +2,7 @@
 
 #include "desktop_surface.h"
 
-// #define GLFW_INCLUDE_NONE
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include "../../engine_log.h"
@@ -41,6 +41,8 @@ DesktopSurface::DesktopSurface() noexcept : window_(create_window()) {
 	});
 
   glfwMakeContextCurrent(window_.get());
+  auto loaded = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+  Assert::is_true<EngineLog>(loaded, "Glad failed to load OpenGL");
 
   set_vsync(true);
 }

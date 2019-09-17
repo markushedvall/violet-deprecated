@@ -9,13 +9,22 @@ class VioletConan(ConanFile):
     description = "C++ game engine"
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False]}
-    default_options = "shared=False"
     generators = "cmake"
     exports_sources = "src/*", "cmake/*", "CMakeLists.txt"
     requires = (
         "spdlog/1.3.1@bincrafters/stable",
         "variant/1.3.0@bincrafters/stable",
         "glfw/3.2.1@bincrafters/stable",
+        "glad/0.1.29@bincrafters/stable",
+    )
+    default_options = (
+        "shared=False",
+        "glad:profile=core",
+        "glad:api_type=gl",
+        "glad:api_version=3.3",
+        "glad:extensions=''",
+        "glad:spec=gl",
+        "glad:no_loader=False"
     )
 
     def build(self):
