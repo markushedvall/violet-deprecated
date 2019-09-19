@@ -16,6 +16,9 @@ add_library(violet
   src/violet/detail/platform/desktop/desktop_surface.cpp
 )
 
+# Do not include OpenGl through GLFW
+target_compile_definitions(violet PUBLIC GLFW_INCLUDE_NONE)
+
 set(VIOLET_PCH_DIR ${CMAKE_SOURCE_DIR}/src/violet/detail/pch)
 
 target_include_directories(violet PRIVATE ${VIOLET_PCH_DIR})
