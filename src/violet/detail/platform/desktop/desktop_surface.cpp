@@ -81,6 +81,11 @@ DesktopSurface::DesktopSurface() noexcept : window_(create_window()) {
     }
   });
 
+  glfwSetCharCallback(window_.get(), [](GLFWwindow* w, unsigned int codepoint) {
+    auto event_buffer = (std::vector<Event>*)glfwGetWindowUserPointer(w);
+    event_buffer->push_back(Event::KeyTyped(codepoint));
+  });
+
   glfwMakeContextCurrent(window_.get());
 
   set_vsync(true);

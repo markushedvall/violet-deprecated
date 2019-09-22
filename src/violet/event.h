@@ -16,6 +16,7 @@ public:
   using AppWillTerminate = detail::AppWillTerminateEvent;
   using KeyPressed = detail::KeyPressedEvent;
   using KeyReleased = detail::KeyReleasedEvent;
+  using KeyTyped = detail::KeyTypedEvent;
   using MouseMoved = detail::MouseMovedEvent;
   using MouseScrolled = detail::MouseScrolledEvent;
   using MouseButtonPressed = detail::MouseButtonPressedEvent;
@@ -62,6 +63,7 @@ private:
     AppWillTerminate,
     KeyPressed,
     KeyReleased,
+    KeyTyped,
     MouseMoved,
     MouseScrolled,
     MouseButtonPressed,
