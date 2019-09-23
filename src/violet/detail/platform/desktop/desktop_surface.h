@@ -2,10 +2,16 @@
 #define VIOLET_DETAIL_DESKTOP_SURFACE_H
 
 #include <memory>
+#include <vector>
+
+#include "../../../event.h"
 
 struct GLFWwindow;
 
 namespace violet {
+
+class EventQueue;
+
 namespace detail {
 
 class DesktopSurface final {
@@ -13,7 +19,7 @@ public:
 
   DesktopSurface() noexcept;
 
-  void poll_events() const noexcept;
+  void poll_events(EventQueue& events) noexcept;
 
   void swap_buffers() const noexcept;
 
@@ -31,6 +37,8 @@ private:
   void set_vsync(bool enabled) const noexcept;
 
   GlfwWindowPtr window_;
+
+  std::vector<Event> event_buffer_;
 
 };
 

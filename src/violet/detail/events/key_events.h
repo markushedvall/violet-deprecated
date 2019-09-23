@@ -6,27 +6,10 @@
 namespace violet {
 namespace detail {
 
-class KeyEvent {
+class KeyPressedEvent final {
 public:
 
-  int key() const noexcept {
-    return key_;
-  }
-
-protected:
-
-  KeyEvent(int key) : key_(key) {}
-
-private:
-
-  int key_;
-
-};
-
-class KeyPressedEvent final : public KeyEvent {
-public:
-
-  KeyPressedEvent(int key) : KeyEvent(key) {}
+  KeyPressedEvent(int key) : key_(key) {}
 
   static constexpr const char* name() noexcept {
     return "KeyPressed";
@@ -36,12 +19,20 @@ public:
     return EventCategory::Input | EventCategory::Keyboard;
   }
 
+  int key() const noexcept {
+    return key_;
+  }
+
+private:
+
+  int key_;
+
 };
 
-class KeyReleasedEvent final : public KeyEvent {
+class KeyReleasedEvent final {
 public:
 
-  KeyReleasedEvent(int key) : KeyEvent(key) {}
+  KeyReleasedEvent(int key) : key_(key) {}
 
   static constexpr const char* name() noexcept {
     return "KeyReleased";
@@ -50,6 +41,37 @@ public:
   static constexpr CategoryFlags category_flags() noexcept {
     return EventCategory::Input | EventCategory::Keyboard;
   }
+
+  int key() const noexcept {
+    return key_;
+  }
+
+private:
+
+  int key_;
+
+};
+
+class KeyTypedEvent final {
+public:
+
+  KeyTypedEvent(unsigned int codepoint) : codepoint_(codepoint) {}
+
+  static constexpr const char* name() noexcept {
+    return "KeyTyped";
+  }
+
+  static constexpr CategoryFlags category_flags() noexcept {
+    return EventCategory::Input | EventCategory::Keyboard;
+  }
+
+  int codepoint() const noexcept {
+    return codepoint_;
+  }
+
+private:
+
+  int codepoint_;
 
 };
 
