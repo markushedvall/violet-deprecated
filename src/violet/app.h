@@ -5,6 +5,8 @@
 
 #include "app_info.h"
 #include "surface.h"
+#include "layer.h"
+#include "layer_stack.h"
 
 #define VIOLET_APP(APP, NAME)\
 std::unique_ptr<violet::App> violet::App::create() {\
@@ -19,14 +21,12 @@ namespace violet {
 
 class EventQueue;
 
-class App {
+class App : public Layer {
 public:
-
-  virtual ~App() {}
 
   void run();
 
-  virtual void tick(EventQueue& events) = 0;
+  void push_layer(Layer* layer);
 
   static std::unique_ptr<App> create();
 
@@ -43,6 +43,7 @@ private:
   static volatile bool terminate_;
   bool running_;
   Surface surface_;
+  LayerStack layer_stack_;
 
 };
 

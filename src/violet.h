@@ -8,5 +8,7 @@
 #include "violet/assert.h"
 #include "violet/event.h"
 #include "violet/event_queue.h"
+#include "violet/layer.h"
+#include "violet/layer_stack.h"
 
 #endif
