@@ -8,8 +8,6 @@
 #include "layer.h"
 #include "layer_stack.h"
 
-#include "detail/engine_log.h"
-
 #define VIOLET_APP(APP, NAME)\
 std::unique_ptr<violet::App> violet::App::create() {\
   return std::unique_ptr<violet::App>(new APP());\
