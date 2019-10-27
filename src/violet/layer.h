@@ -14,7 +14,7 @@ public:
 
   virtual void detach() {}
 
-  virtual void tick(EventQueue& events) = 0;
+  virtual void tick(EventQueue& events) {};
 
   virtual void render() {}
 

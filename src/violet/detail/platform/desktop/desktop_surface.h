@@ -16,6 +16,7 @@ namespace detail {
 
 class DesktopSurface final {
 public:
+  friend class ImGuiImpl;
 
   DesktopSurface() noexcept;
 

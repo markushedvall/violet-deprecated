@@ -13,16 +13,18 @@ void App::run() {
   EventQueue events;
   running_ = true;
 
-  this->attach();
+  attach();
+  imgui_.attach(surface_);
 
   while (running_) {
     events.clear();
     poll_events(events);
 
+    imgui_.tick(events);
     for (auto&& layer : detail::reverse(layer_stack_)) {
       layer->tick(events);
     }
-    this->tick(events);
+    tick(events);
 
     for (auto&& e : events) {
       if (e.is<Event::AppWillTerminate>()) {
@@ -30,19 +32,25 @@ void App::run() {
       }
     }
 
-    this->render();
+    render();
     for (auto&& layer : layer_stack_) {
       layer->render();
     }
+    imgui_.render();
 
     surface_.swap_buffers();
   }
 
-  this->detach();
+  detach();
+  imgui_.detach();
 }
 
 void App::push_layer(Layer* layer) {
   layer_stack_.push(layer);
+}
+
+void App::set_imgui_layer(std::unique_ptr<Layer>&& layer) {
+  imgui_.set_layer(std::move(layer));
 }
 
 void App::poll_events(EventQueue& events) {
