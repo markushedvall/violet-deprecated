@@ -49,5 +49,5 @@ void ImGuiLayer::render() {
   }
 }
 
-}
-}
+} // namespace detail
+} // namespace violet

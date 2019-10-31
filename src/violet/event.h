@@ -3,16 +3,15 @@
 
 #include <mpark/variant.hpp>
 
+#include "detail/event_category.h"
 #include "detail/events/app_events.h"
 #include "detail/events/key_events.h"
 #include "detail/events/mouse_events.h"
-#include "detail/event_category.h"
 
 namespace violet {
 
 class Event final {
 public:
-
   using AppWillTerminate = detail::AppWillTerminateEvent;
   using KeyPressed = detail::KeyPressedEvent;
   using KeyReleased = detail::KeyReleasedEvent;
@@ -58,32 +57,26 @@ public:
   }
 
 private:
-
-  using EventVariant = mpark::variant<
-    AppWillTerminate,
-    KeyPressed,
-    KeyReleased,
-    KeyTyped,
-    MouseMoved,
-    MouseScrolled,
-    MouseButtonPressed,
-    MouseButtonReleased
-  >;
+  using EventVariant = mpark::variant<AppWillTerminate, KeyPressed, KeyReleased, KeyTyped,
+      MouseMoved, MouseScrolled, MouseButtonPressed, MouseButtonReleased>;
 
   struct NameVisitor {
     template<typename E>
-    constexpr const char* operator()(const E&) { return E::name(); }
+    constexpr const char* operator()(const E&) {
+      return E::name();
+    }
   };
 
   struct CategoryFlagsVisitor {
     template<typename E>
-    constexpr CategoryFlags operator()(const E&) { return E::category_flags(); }
+    constexpr CategoryFlags operator()(const E&) {
+      return E::category_flags();
+    }
   };
 
   EventVariant event_;
-
 };
 
-}
+} // namespace violet
 
 #endif

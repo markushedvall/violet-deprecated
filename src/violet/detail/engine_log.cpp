@@ -10,5 +10,5 @@ Logger& EngineLog::logger() {
   return logger;
 }
 
-}
-}
+} // namespace detail
+} // namespace violet

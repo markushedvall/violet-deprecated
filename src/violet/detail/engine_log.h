@@ -8,7 +8,6 @@ namespace detail {
 
 class EngineLog final {
 public:
-
   EngineLog() = delete;
 
   template<typename... Args>
@@ -37,12 +36,10 @@ public:
   }
 
 private:
-
   static Logger& logger();
-
 };
 
-}
-}
+} // namespace detail
+} // namespace violet
 
 #endif

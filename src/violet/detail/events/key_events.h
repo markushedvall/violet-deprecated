@@ -8,7 +8,6 @@ namespace detail {
 
 class KeyPressedEvent final {
 public:
-
   KeyPressedEvent(int key) : key_(key) {}
 
   static constexpr const char* name() noexcept {
@@ -24,14 +23,11 @@ public:
   }
 
 private:
-
   int key_;
-
 };
 
 class KeyReleasedEvent final {
 public:
-
   KeyReleasedEvent(int key) : key_(key) {}
 
   static constexpr const char* name() noexcept {
@@ -47,14 +43,11 @@ public:
   }
 
 private:
-
   int key_;
-
 };
 
 class KeyTypedEvent final {
 public:
-
   KeyTypedEvent(unsigned int codepoint) : codepoint_(codepoint) {}
 
   static constexpr const char* name() noexcept {
@@ -70,12 +63,10 @@ public:
   }
 
 private:
-
   int codepoint_;
-
 };
 
-}
-}
+} // namespace detail
+} // namespace violet
 
 #endif

@@ -22,4 +22,4 @@ void EntryPoint::enter() {
   App::create()->run();
 }
 
-}
+} // namespace violet

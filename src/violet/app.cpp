@@ -1,9 +1,9 @@
 #include "pch.h"
 
 #include "app.h"
-#include "event_queue.h"
-#include "event.h"
 #include "detail/util/range.h"
+#include "event.h"
+#include "event_queue.h"
 
 namespace violet {
 
@@ -60,4 +60,4 @@ void App::poll_events(EventQueue& events) {
   surface_.poll_events(events);
 }
 
-}
+} // namespace violet

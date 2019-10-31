@@ -1,8 +1,8 @@
 #ifndef VIOLET_DETAIL_IMGUI_LAYER_H
 #define VIOLET_DETAIL_IMGUI_LAYER_H
 
-#include "../surface.h"
 #include "../layer.h"
+#include "../surface.h"
 
 #include <memory.h>
 
@@ -14,7 +14,6 @@ namespace detail {
 
 class ImGuiLayer final {
 public:
-
   void set_layer(std::unique_ptr<Layer>&& layer) {
     layer_ = std::move(layer);
   }
@@ -33,12 +32,10 @@ public:
   void render();
 
 private:
-
   std::unique_ptr<Layer> layer_;
-
 };
 
-}
-}
+} // namespace detail
+} // namespace violet
 
 #endif // VIOLET_DETAIL_IMGUI_LAYER_H

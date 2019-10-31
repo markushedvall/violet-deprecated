@@ -10,7 +10,6 @@ namespace detail {
 
 class ImGuiImpl final {
 public:
-
   ImGuiImpl() = delete;
 
   static void init(const Surface& surface);
@@ -20,10 +19,9 @@ public:
   static void new_frame();
 
   static void render(ImDrawData* draw_data);
-
 };
 
-}
-}
+} // namespace detail
+} // namespace violet
 
 #endif // VIOLET_DETAIL_IMGUI_LAYER_H

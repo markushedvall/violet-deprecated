@@ -9,7 +9,6 @@ namespace violet {
 
 class EventQueue final {
 public:
-
   using Iterator = std::deque<Event>::iterator;
 
   void push(Event&& event) {
@@ -33,11 +32,9 @@ public:
   }
 
 private:
-
   std::deque<Event> queue_;
-
 };
 
-}
+} // namespace violet
 
 #endif
