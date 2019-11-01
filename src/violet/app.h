@@ -7,6 +7,7 @@
 #include "surface.h"
 #include "layer.h"
 #include "layer_stack.h"
+#include "detail/imgui_layer.h"
 
 #define VIOLET_APP(APP, NAME)\
 std::unique_ptr<violet::App> violet::App::create() {\
@@ -28,6 +29,12 @@ public:
 
   void push_layer(Layer* layer);
 
+  void set_imgui_layer(std::unique_ptr<Layer>&& layer);
+
+  std::unique_ptr<Layer>&& remove_layer() {
+    return imgui_.remove_layer();
+  }
+
   static std::unique_ptr<App> create();
 
   static const AppInfo& info();
@@ -44,6 +51,7 @@ private:
   bool running_;
   Surface surface_;
   LayerStack layer_stack_;
+  detail::ImGuiLayer imgui_;
 
 };
 

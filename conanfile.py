@@ -16,6 +16,7 @@ class VioletConan(ConanFile):
         "variant/1.3.0@bincrafters/stable",
         "glfw/3.2.1@bincrafters/stable",
         "glad/0.1.29@bincrafters/stable",
+        "imgui/1.69@bincrafters/stable",
     )
     default_options = (
         "shared=False",
