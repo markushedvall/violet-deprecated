@@ -13,7 +13,7 @@ public:
 
   virtual void detach() {}
 
-  virtual void tick(EventQueue& events){};
+  virtual void tick(EventQueue& events) {}
 
   virtual void render() {}
 };

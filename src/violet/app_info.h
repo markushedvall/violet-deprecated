@@ -8,9 +8,9 @@ namespace violet {
 
 class AppInfo final {
 public:
-  explicit AppInfo(const std::string& name) : name_(name){};
+  explicit AppInfo(const std::string& name) : name_(name) {}
 
-  explicit AppInfo(std::string&& name) noexcept : name_(std::move(name)){};
+  explicit AppInfo(std::string&& name) noexcept : name_(std::move(name)) {}
 
   const std::string& name() const noexcept {
     return name_;
