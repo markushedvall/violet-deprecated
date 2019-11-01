@@ -2,13 +2,13 @@
 
 #include "desktop_surface.h"
 
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
-#include "../../engine_log.h"
-#include "../../../assert.h"
 #include "../../../app.h"
+#include "../../../assert.h"
 #include "../../../event_queue.h"
+#include "../../engine_log.h"
 
 namespace violet {
 namespace detail {
@@ -18,9 +18,7 @@ struct Glfw {
     EngineLog::trace("Initializing GLFW");
     auto initialized = glfwInit();
     Assert::is_true<EngineLog>(initialized, "Failed to initialize GLFW");
-    glfwSetErrorCallback([](int err, const char* msg) {
-      EngineLog::error("GLFW error: {}", msg);
-    });
+    glfwSetErrorCallback([](int err, const char* msg) { EngineLog::error("GLFW error: {}", msg); });
   }
 
   ~Glfw() {
@@ -39,7 +37,7 @@ DesktopSurface::DesktopSurface() noexcept : window_(create_window()) {
   glfwSetWindowCloseCallback(window_.get(), [](GLFWwindow* w) {
     EngineLog::trace("GLFW Window close callback");
     App::terminate();
-	});
+  });
 
   glfwSetCursorPosCallback(window_.get(), [](GLFWwindow* w, double x, double y) {
     auto event_buffer = (std::vector<Event>*)glfwGetWindowUserPointer(w);
@@ -87,7 +85,7 @@ DesktopSurface::DesktopSurface() noexcept : window_(create_window()) {
   });
 
   glfwMakeContextCurrent(window_.get());
-  auto loaded = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+  auto loaded = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
   Assert::is_true<EngineLog>(loaded, "Glad failed to load OpenGL");
 
   set_vsync(true);
@@ -112,12 +110,12 @@ DesktopSurface::GlfwWindowPtr DesktopSurface::create_window() noexcept {
 
   const char* window_title = App::info().name().c_str();
   return std::unique_ptr<GLFWwindow, GlfwWindowDeleter>(
-    glfwCreateWindow(mode->width, mode->height, window_title, monitor, nullptr));
+      glfwCreateWindow(mode->width, mode->height, window_title, monitor, nullptr));
 }
 
 void DesktopSurface::poll_events(EventQueue& events) noexcept {
   glfwPollEvents();
-  for (auto event: event_buffer_) {
+  for (auto event : event_buffer_) {
     events.push(std::move(event));
   }
   event_buffer_.clear();
@@ -137,5 +135,5 @@ void DesktopSurface::set_vsync(bool enabled) const noexcept {
   }
 }
 
-}
-}
+} // namespace detail
+} // namespace violet

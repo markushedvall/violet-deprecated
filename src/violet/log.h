@@ -7,7 +7,6 @@ namespace violet {
 
 class Log final {
 public:
-
   Log() = delete;
 
   template<typename... Args>
@@ -36,11 +35,9 @@ public:
   }
 
 private:
-
   static Logger& logger();
-
 };
 
-}
+} // namespace violet
 
 #endif

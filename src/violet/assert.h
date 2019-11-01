@@ -5,32 +5,31 @@
 
 #include <fmt/format.h>
 
-#include "logger.h"
 #include "log.h"
+#include "logger.h"
 
 namespace violet {
 
 class Assert final {
 public:
-
   template<typename... Args>
   static void is_true(Logger& logger, bool condition, const Args&... args) {
-    #ifndef NDEBUG
+#ifndef NDEBUG
     if (!condition) {
       logger.error("Assertion failed: {}", fmt::format(args...));
       std::abort();
     }
-    #endif
+#endif
   }
 
   template<typename L, typename... Args>
   static void is_true(bool condition, const Args&... args) {
-    #ifndef NDEBUG
+#ifndef NDEBUG
     if (!condition) {
       L::error("Assertion failed: {}", fmt::format(args...));
       std::abort();
     }
-    #endif
+#endif
   }
 
   template<typename... Args>
@@ -40,22 +39,22 @@ public:
 
   template<typename T, typename... Args>
   static void not_null(Logger& logger, const T* ptr, const Args&... args) {
-    #ifndef NDEBUG
+#ifndef NDEBUG
     if (ptr == nullptr) {
       logger.error("Assertion failed: {}", fmt::format(args...));
       std::abort();
     }
-    #endif
+#endif
   }
 
   template<typename L, typename T, typename... Args>
   static void not_null(const T* ptr, const Args&... args) {
-    #ifndef NDEBUG
+#ifndef NDEBUG
     if (ptr == nullptr) {
       L::error("Assertion failed: {}", fmt::format(args...));
       std::abort();
     }
-    #endif
+#endif
   }
 
   template<typename T, typename... Args>
@@ -65,27 +64,26 @@ public:
 
   template<typename... Args>
   static void not_reached(Logger& logger, const Args&... args) {
-    #ifndef NDEBUG
+#ifndef NDEBUG
     logger.error("Assertion failed: {}", fmt::format(args...));
     std::abort();
-    #endif
+#endif
   }
 
   template<typename L, typename... Args>
   static void not_reached(const Args&... args) {
-    #ifndef NDEBUG
+#ifndef NDEBUG
     L::error("Assertion failed: {}", fmt::format(args...));
     std::abort();
-    #endif
+#endif
   }
 
   template<typename... Args>
   static void not_reached(const Args&... args) {
     not_reached<Log>(args...);
   }
-
 };
 
-}
+} // namespace violet
 
 #endif

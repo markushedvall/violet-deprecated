@@ -26,5 +26,5 @@ void ImGuiImpl::render(ImDrawData* draw_data) {
   ImGui_ImplOpenGL3_RenderDrawData(draw_data);
 }
 
-}
-}
+} // namespace detail
+} // namespace violet

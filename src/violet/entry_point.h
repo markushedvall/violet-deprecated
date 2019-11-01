@@ -5,13 +5,11 @@ namespace violet {
 
 class EntryPoint final {
 public:
-
   EntryPoint() = delete;
 
   static void enter();
-
 };
 
-}
+} // namespace violet
 
 #endif

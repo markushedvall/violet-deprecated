@@ -1,14 +1,13 @@
 #ifndef VIOLET_LOGGER_H
 #define VIOLET_LOGGER_H
 
-#include <string>
 #include <spdlog/logger.h>
+#include <string>
 
 namespace violet {
 
 class Logger final {
 public:
-
   explicit Logger(const std::string& name) noexcept;
 
   Logger(const Logger& other) = delete;
@@ -41,11 +40,9 @@ public:
   }
 
 private:
-
   spdlog::logger logger_;
-
 };
 
-}
+} // namespace violet
 
 #endif

@@ -1,7 +1,7 @@
 #include "pch.h"
 
-#include "log.h"
 #include "app.h"
+#include "log.h"
 
 namespace violet {
 
@@ -10,4 +10,4 @@ Logger& Log::logger() {
   return logger;
 }
 
-}
+} // namespace violet

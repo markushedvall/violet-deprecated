@@ -4,19 +4,19 @@
 #include <memory>
 
 #include "app_info.h"
-#include "surface.h"
+#include "detail/imgui_layer.h"
 #include "layer.h"
 #include "layer_stack.h"
-#include "detail/imgui_layer.h"
+#include "surface.h"
 
-#define VIOLET_APP(APP, NAME)\
-std::unique_ptr<violet::App> violet::App::create() {\
-  return std::unique_ptr<violet::App>(new APP());\
-}\
-const violet::AppInfo& violet::App::info() {\
-  static violet::AppInfo app_info(NAME);\
-  return app_info;\
-}
+#define VIOLET_APP(APP, NAME) \
+  std::unique_ptr<violet::App> violet::App::create() { \
+    return std::unique_ptr<violet::App>(new APP()); \
+  } \
+  const violet::AppInfo& violet::App::info() { \
+    static violet::AppInfo app_info(NAME); \
+    return app_info; \
+  }
 
 namespace violet {
 
@@ -24,7 +24,6 @@ class EventQueue;
 
 class App : public Layer {
 public:
-
   void run();
 
   void push_layer(Layer* layer);
@@ -44,7 +43,6 @@ public:
   }
 
 private:
-
   void poll_events(EventQueue& events);
 
   static volatile bool terminate_;
@@ -52,9 +50,8 @@ private:
   Surface surface_;
   LayerStack layer_stack_;
   detail::ImGuiLayer imgui_;
-
 };
 
-}
+} // namespace violet
 
 #endif

@@ -9,7 +9,6 @@ namespace violet {
 
 class LayerStack final {
 public:
-
   using Iterator = std::vector<std::unique_ptr<Layer>>::iterator;
 
   ~LayerStack() {
@@ -32,11 +31,9 @@ public:
   }
 
 private:
-
   std::vector<std::unique_ptr<Layer>> layers_;
-
 };
 
-}
+} // namespace violet
 
 #endif

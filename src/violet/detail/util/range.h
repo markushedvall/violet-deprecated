@@ -7,7 +7,6 @@ namespace detail {
 template<typename I>
 class Range final {
 public:
-
   Range(I begin, I end) : begin_(begin), end_(end) {}
 
   I begin() const {
@@ -19,20 +18,17 @@ public:
   }
 
 private:
-
   I begin_;
   I end_;
-
 };
 
-template<typename R,
-         typename I = decltype(std::begin(std::declval<R>())),
-         typename RI = std::reverse_iterator<I>>
+template<typename R, typename I = decltype(std::begin(std::declval<R>())),
+    typename RI = std::reverse_iterator<I>>
 Range<RI> reverse(R&& range) {
-    return Range<RI>(RI(std::end(range)), RI(std::begin(range)));
+  return Range<RI>(RI(std::end(range)), RI(std::begin(range)));
 }
 
-}
-}
+} // namespace detail
+} // namespace violet
 
 #endif

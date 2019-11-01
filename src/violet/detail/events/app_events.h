@@ -8,7 +8,6 @@ namespace detail {
 
 class AppWillTerminateEvent final {
 public:
-
   static constexpr const char* name() noexcept {
     return "AppWillTerminate";
   }
@@ -16,10 +15,9 @@ public:
   static constexpr CategoryFlags category_flags() noexcept {
     return EventCategory::App;
   }
-
 };
 
-}
-}
+} // namespace detail
+} // namespace violet
 
 #endif

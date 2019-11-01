@@ -25,7 +25,6 @@ public:
   void swap_buffers() const noexcept;
 
 private:
-
   class GlfwWindowDeleter final {
   public:
     void operator()(GLFWwindow* window);
@@ -40,10 +39,9 @@ private:
   GlfwWindowPtr window_;
 
   std::vector<Event> event_buffer_;
-
 };
 
-}
-}
+} // namespace detail
+} // namespace violet
 
 #endif
